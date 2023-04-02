@@ -1,0 +1,130 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.dss.assignment2";
+option java_outer_classname = "EduCostStatProto";
+
+package com.dss.assignment2;
+
+message StateExpense {
+  string state = 1;
+  int32 total_expense = 2;
+}
+
+message StateExpenseGrowth {
+  string state = 1;
+  double total_expense = 2;
+  double growth_rate = 3;
+}
+
+message RegionAverageExpense {
+  string region = 1;
+  double average_expense = 2;
+}
+
+message TotalExpensesCost {
+  string expense = 1;
+  int32 total_cost = 2;
+}
+
+message EduCostStatQueryOne {
+  string id = 1;
+  int32 year = 2;
+  string state = 3;
+  string type = 4;
+  string length = 5;
+  string expense = 6;
+  int32 value = 7;
+}
+
+message EduCostStatQueryTwo {
+  string id = 1;
+  int32 year = 2;
+  string type = 3;
+  string length = 4;
+  repeated StateExpense top5_states = 5;
+}
+
+message EduCostStatQueryThree {
+  string id = 1;
+  int32 year = 2;
+  string type = 3;
+  string length = 4;
+  repeated StateExpense top5_states = 5;
+}
+
+message EduCostStatQueryFour {
+  string id = 1;
+  int32 year = 2;
+  string type = 3;
+  string length = 4;
+  repeated StateExpenseGrowth top5_state_expense_growths = 5;
+}
+
+message EduCostStatQueryFive {
+  string id = 1;
+  int32 year = 2;
+  string type = 3;
+  string length = 4;
+  repeated RegionAverageExpense region_expenses = 5;
+}
+
+service EduCostStatService {
+  rpc SaveEduCostStatQueryOne (SaveEduCostStatQueryOneRequest) returns (SaveEduCostStatQueryOneResponse);
+  rpc SaveEduCostStatQueryTwo (SaveEduCostStatQueryTwoRequest) returns (SaveEduCostStatQueryTwoResponse);
+  rpc SaveEduCostStatQueryThree (SaveEduCostStatQueryThreeRequest) returns (SaveEduCostStatQueryThreeResponse);
+  rpc SaveEduCostStatQueryFour (SaveEduCostStatQueryFourRequest) returns (SaveEduCostStatQueryFourResponse);
+  rpc SaveEduCostStatQueryFive (SaveEduCostStatQueryFiveRequest) returns (SaveEduCostStatQueryFiveResponse);
+}
+
+message SaveEduCostStatQueryOneRequest {
+  int32 year = 1;
+  string state = 2;
+  string type = 3;
+  string length = 4;
+  string expense = 5;
+}
+
+message SaveEduCostStatQueryOneResponse {
+  EduCostStatQueryOne edu_cost_stat_query_one = 1;
+}
+
+message SaveEduCostStatQueryTwoRequest {
+  int32 year = 1;
+  string type = 2;
+  string length = 3;
+}
+
+message SaveEduCostStatQueryTwoResponse {
+  EduCostStatQueryTwo edu_cost_stat_query_two = 1;
+}
+
+message SaveEduCostStatQueryThreeRequest {
+  int32 year = 1;
+  string type = 2;
+  string length = 3;
+}
+
+message SaveEduCostStatQueryThreeResponse {
+  EduCostStatQueryThree edu_cost_stat_query_three = 1;
+}
+
+message SaveEduCostStatQueryFourRequest {
+  int32 base_year = 1;
+  string type = 2;
+  string length = 3;
+}
+
+message SaveEduCostStatQueryFourResponse {
+  EduCostStatQueryFour edu_cost_stat_query_four = 1;
+}
+
+message SaveEduCostStatQueryFiveRequest {
+  int32 year = 1;
+  string type = 2;
+  string length = 3;
+}
+
+message SaveEduCostStatQueryFiveResponse {
+  EduCostStatQueryFive edu_cost_stat_query_five = 1;
+}
